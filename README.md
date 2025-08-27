@@ -6,6 +6,17 @@ This repository contains the official Pytorch implementation of BRMSA-Net.
 - Activate the virtual environment: `source BRMSANet/bin/activate`
 - Install the requirements: `pip install -r requirements.txt`
 
+### Training
+- Download MiT-b3's pretrained `weights` ([google drive](https://drive.google.com/drive/folders/1w59gNxY0z68XnJT4sHOiYM5lgy3tgE7g?usp=sharing).
+- Run `sh train.sh` for training. 
+### Testing
+- We provide the trained weights
+- Run `sh test.sh` for testing.
+### Evaluation
+- We provide the trained weights
+- Run `sh test.sh` for testing.
+
+
 ### Citation
 If you find this code useful in your research, please consider citing:
 
@@ -20,4 +31,5 @@ If you find this code useful in your research, please consider citing:
   publisher = {Elsevier}
 }
 ```
+
 
