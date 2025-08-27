@@ -7,10 +7,10 @@ This repository contains the official Pytorch implementation of BRMSA-Net.
 - Install the requirements: `pip install -r requirements.txt`
 
 ### Training
-- Download MiT-b3's pretrained `weights` ([google drive](https://drive.google.com/drive/folders/1w59gNxY0z68XnJT4sHOiYM5lgy3tgE7g?usp=sharing)).
+- Download the pretrained weights of MiT-b3 ([google drive](https://drive.google.com/drive/folders/1w59gNxY0z68XnJT4sHOiYM5lgy3tgE7g?usp=sharing)).
 - Run `sh train.sh` for training. 
 ### Testing
-- We provide the trained weights
+- The trained weights of the BRMSA-Net model are available here: ((https://drive.google.com/file/d/1o-2zPh0504zpD3zWjksGGA-9jr_i4sJs/view?usp=sharing))
 - Run `sh test.sh` for testing.
 ### Evaluation
 - We provide the trained weights
@@ -31,6 +31,7 @@ If you find this code useful in your research, please consider citing:
   publisher = {Elsevier}
 }
 ```
+
 
 
 
