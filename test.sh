@@ -1,0 +1,1 @@
+python3 -W ignore test.py --backbone b3 --task_folder polyp --test_path polyp/TestDataset/ 
