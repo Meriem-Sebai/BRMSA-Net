@@ -8,7 +8,7 @@ If you have any questions regarding our paper, please don’t hesitate to reach 
 For the early detection of colorectal cancer, automated polyp segmentation from colonoscopy images is very crucial. Polyps, often amorphous, exhibit a wide range of sizes and shapes. Furthermore, the boundaries separating polyps from the surrounding mucosal tissues are frequently not distinct. Consequently, segmenting polyps in practical settings is a particularly challenging task. In this study, we propose a Boundary Recalibration and Multi-Scale Aggregation Network (BRMSA-Net) for precise and consistent colon polyp segmentation. In particular, we first introduce the Multi-level Feature Aggregation (MFA) decoder to generate a global segmentation map by fusing high-level features for polyp localization. The MFA decoder incorporates the Criss-cross Feature Fusion (CFF) module, which effectively combines the cross-level features and addresses the issue of semantic gap across different levels. The segmentation map predicted by the MFA decoder is improved by the novel Incremental Boundary Refinement (IBR) module. The IBR module includes the Incremental Scale Fusion (ISF) module, which uses dilated convolutions to extract features with different receptive fields and strategically fuses them to reduce feature disparity. These features are then utilized by the Boundary Recalibration Cross-attention (BRC) module, which gradually refines the polyp boundaries by combining spatial and channel cross-attention. Extensive experiments on public polyp datasets show that BRMSA-Net outperforms several competing approaches in learning and generalization. It achieves 94.02% DSC and 89.46% IoU on CVC-ClinicDB, 92.26% DSC and 87.28% IoU on KvasirSEG, 82.45% DSC and 74.52% IoU on CVC-ColonDB, and 82.28% DSC and 73.81% IoU on ETIS-Larib.
 
 ### 2.2. Framework Overview
-
+![BRMSA-Net Architecture](https://drive.google.com/file/d/1d7s9o0nyNBBR3zWeIQTNb0H-MZPpPvvR/view?usp=sharing)
 ### 2.3. Qualitative Results
 
 # 3. Proposed Baseline
@@ -40,6 +40,7 @@ If you find this code useful in your research, please consider citing:
   publisher = {Elsevier}
 }
 ```
+
 
 
 
