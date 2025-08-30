@@ -1,5 +1,5 @@
 # BRMSA-Net: Disclosing concealed colorectal polyps in colonoscopy images via Boundary Recalibration and Multi-Scale Aggregation Network
-This repository contains the official Pytorch implementation of BRMSA-Net.
+This repository contains the official Pytorch implementation of our Biomedical Signal Processing and Control paper: [BRMSA-Net: Disclosing concealed colorectal polyps in colonoscopy images via Boundary Recalibration and Multi-Scale Aggregation Network](https://www.sciencedirect.com/science/article/abs/pii/S1746809425005944).
 
 ### Environment
 - Create a virtual environment: `python -m venv BRMSANet`
@@ -30,6 +30,7 @@ If you find this code useful in your research, please consider citing:
   publisher = {Elsevier}
 }
 ```
+
 
 
 
