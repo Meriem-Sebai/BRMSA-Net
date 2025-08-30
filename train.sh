@@ -1,1 +1,1 @@
-python3 -W ignore train.py --backbone b3 --task_folder polyp --train_path polyp/TrainDataset 
+python3 -W ignore train.py --backbone b3 --train_path polyp/TrainDataset 
