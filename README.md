@@ -11,6 +11,12 @@ For the early detection of colorectal cancer, automated polyp segmentation from 
 ![BRMSA-Net Architecture](https://drive.google.com/uc?export=view&id=1d7s9o0nyNBBR3zWeIQTNb0H-MZPpPvvR)
 
 ### 2.3. Qualitative Results
+| Dataset      |     DSC      |     IoU     |
+|:-------------|:------------:|------------:|
+| CVC-ClinicDB |    94.02     |    89.46    |
+| KvasirSEG    |    92.26     |    87.28    |
+| CVC-ColonDB  |    82.45     |    74.52    |
+| ETIS-Larib   |    82.28     |    73.81    |
 
 # 3. Proposed Baseline
 ### Environment
@@ -41,6 +47,7 @@ If you find this code useful in your research, please consider citing:
   publisher = {Elsevier}
 }
 ```
+
 
 
 
