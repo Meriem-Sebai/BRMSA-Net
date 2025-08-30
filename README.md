@@ -12,7 +12,7 @@ For the early detection of colorectal cancer, automated polyp segmentation from 
 ### 2.2. Framework Overview
 ![BRMSA-Net Architecture](https://drive.google.com/uc?export=view&id=1d7s9o0nyNBBR3zWeIQTNb0H-MZPpPvvR)
 
-### 2.3. Qualitative Results
+### 2.3. Quantitative Results
 | Dataset      |     DSC(%)    |     IoU(%)   |
 |:-------------|:-------------:|-------------:|
 | CVC-ClinicDB |     94.02     |     89.46    |
@@ -49,6 +49,7 @@ If you find this code useful in your research, please consider citing:
   publisher = {Elsevier}
 }
 ```
+
 
 
 
