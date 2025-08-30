@@ -67,21 +67,19 @@ if __name__ == '__main__':
     parser.add_argument('--weight', type=str,
                         default='')    
     parser.add_argument('--test_size', type=int,
-                        default=352, help='training dataset size')    
-    parser.add_argument('--task_folder', type=str,
-                        default='polyp', help='path to best checkpoint')
+                        default=352, help='training dataset size')       
     parser.add_argument('--test_path', type=str,
                         default='', help='path to dataset')
     args = parser.parse_args()   
 
-    save_path = './results/{}/'.format(args.task_folder)
+    save_path = './results'
     if not os.path.exists(save_path):
         os.makedirs(save_path, exist_ok=True)
     else:
         print("Save path existed")       
     
     model = BRMSANet().cuda() 
-    ckpt_file = './snapshots/{}/{}'.format(args.task_folder, 'best.pth')
+    ckpt_file = './snapshots/{}'.format('best.pth')
     checkpoint = torch.load(ckpt_file)
     model.load_state_dict(checkpoint['state_dict'])        
     
