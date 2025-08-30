@@ -188,7 +188,7 @@ if __name__ == '__main__':
     )
     total_step = len(train_loader)    
 
-    model = BRMSANet(pretrained='pretrained/mit_{}.pth'.format(args.backbone)).cuda()      
+    model = BRMSANet(pretrained='./pretrained/mit_{}.pth'.format(args.backbone)).cuda()      
     optimizer = torch.optim.Adam(model.parameters(), args.init_lr)       
            
     start_epoch = 1
