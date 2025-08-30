@@ -26,7 +26,7 @@ For the early detection of colorectal cancer, automated polyp segmentation from 
 - Activate the virtual environment: `source BRMSANet/bin/activate`
 - Install the requirements: `pip install -r requirements.txt`
 ### Training
-- Create a folder named `pretrained`, download the MiT-b3 pretrained weights from [here](https://drive.google.com/drive/folders/1w59gNxY0z68XnJT4sHOiYM5lgy3tgE7g?usp=sharing) and place them inside the `pretrained` folder.
+- Create a folder named `pretrained`, download the MiT-b3 pretrained weights from [here](https://drive.google.com/file/d/1eXSaZKm4H-yAw1pXl_RKC6wYkQ7EH2vJ/view?usp=sharing) and place them inside the `pretrained` folder.
 - Run `sh train.sh` for training. 
 ### Testing
 - Download the pretrained weights of the BRMSA-Net model from [here](https://drive.google.com/file/d/15u-ALlLczP1XHGxG06eFTRZrct-zXVXq/view?usp=sharing).
@@ -49,6 +49,7 @@ If you find this code useful in your research, please consider citing:
   publisher = {Elsevier}
 }
 ```
+
 
 
 
