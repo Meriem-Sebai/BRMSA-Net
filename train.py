@@ -150,9 +150,7 @@ if __name__ == '__main__':
     parser.add_argument('--train_size', type=int,
                         default=352, help='training dataset size')
     parser.add_argument('--clip', type=float,
-                        default=0.5, help='gradient clipping margin')
-    parser.add_argument('--task_folder', type=str, 
-                        default='polyp', help='save path')
+                        default=0.5, help='gradient clipping margin')    
     parser.add_argument('--train_path', type=str,
                         default='', help='path to train dataset')       
     parser.add_argument('--resume_path', type=str, 
@@ -160,7 +158,7 @@ if __name__ == '__main__':
     
     args = parser.parse_args()
 
-    save_path = './snapshots/{}/'.format(args.task_folder)
+    save_path = './snapshots'
     if not os.path.exists(save_path):
         os.makedirs(save_path, exist_ok=True)
     else:
@@ -201,9 +199,8 @@ if __name__ == '__main__':
         start_epoch = checkpoint['epoch']
         cur_lr = checkpoint['cur_lr']
         model.load_state_dict(checkpoint['state_dict'])
-        optimizer.load_state_dict(checkpoint['optimizer'])
-                
-    print("#"*20, "Start Training", "#"*20)
+        optimizer.load_state_dict(checkpoint['optimizer'])                
+    
     for epoch in range(start_epoch, args.num_epochs+1):
         cur_lr = adjust_lr(optimizer, cur_lr, epoch, args)
         checkpoint = train(train_loader, model, optimizer, epoch, cur_lr, args)
