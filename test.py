@@ -98,7 +98,7 @@ if __name__ == '__main__':
                         drop_last=False
                     )  
         
-        result_path = save_path + data_name
+        result_path = os.path.join(save_path, data_name) 
         if not os.path.exists(result_path):
             os.makedirs(result_path)
 
