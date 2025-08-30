@@ -1,1 +1,1 @@
-python3 -W ignore eval.py --task_folder polyp --test_path polyp/TestDataset/ 
+python3 -W ignore eval.py --test_path polyp/TestDataset/ 
