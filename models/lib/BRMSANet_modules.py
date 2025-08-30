@@ -107,35 +107,45 @@ class SpatialChannelAttention(nn.Module):
         sa = self.sa(x) * x
         return ca + sa      
  
+class CFF(nn.Module):
+    def __init__(self, channel):
+        super(CFF, self).__init__()
+        self.ca_sa = SpatialChannelAttention(channel)
+        self.cross_axis = CrissCrossAttention(channel)  
+
+    def forward(self, T, X):
+        L = self.ca_sa(X)   
+        T = self.cross_axis(T, L)
+        T = self.cross_axis(T, L) 
+        T = torch.cat([L, T], dim=1)   
+        return T      
+ 
 class MFA(nn.Module):
-    def __init__(self, dim=32):
+    def __init__(self, channel=32):
         super(MFA, self).__init__()
         
         in_channels=[64, 128, 320, 512]
 
-        self.Translayer2_1 = BasicConv2d(in_channels[1], dim, 1)
-        self.Translayer3_1 = BasicConv2d(in_channels[2], dim, 1)
-        self.Translayer4_1 = BasicConv2d(in_channels[3], dim, 1)
+        self.Translayer2_1 = BasicConv2d(in_channels[1], channel, 1)
+        self.Translayer3_1 = BasicConv2d(in_channels[2], channel, 1)
+        self.Translayer4_1 = BasicConv2d(in_channels[3], channel, 1)
               
         self.upsample = nn.Upsample(scale_factor=2, mode='bilinear', align_corners=True)
+        self.conv_upsample1 = BasicConv2d(channel, channel, 3, padding=1)
+        self.conv_upsample2 = BasicConv2d(channel, channel, 3, padding=1)
+        self.conv_upsample3 = BasicConv2d(channel, channel, 3, padding=1)
 
-        self.conv_upsample1 = BasicConv2d(dim, dim, 3, padding=1)
-        self.conv_upsample2 = BasicConv2d(dim, dim, 3, padding=1)
-        self.conv_upsample3 = BasicConv2d(dim, dim, 3, padding=1)
-        self.conv_upsample4 = BasicConv2d(dim, dim, 3, padding=1)
-        self.conv_upsample5 = BasicConv2d(dim, dim, 3, padding=1)
-        
-        self.ca_sa3 = SpatialChannelAttention(dim)
-        self.cross_axis3 = CrissCrossAttention(dim)    
-        self.conv3 = BasicConv2d(2*dim, dim, 3, padding=1)         
+        self.conv_upsample4 = BasicConv2d(channel, channel, 3, padding=1)       
+        self.CFF3 = CFF(channel)      
 
-        self.ca_sa2 = SpatialChannelAttention(dim) 
-        self.cross_axis2 = CrissCrossAttention(dim)    
-        self.conv2 = BasicConv2d(2*dim, dim, 3, padding=1)  
+        self.conv3 = BasicConv2d(2 * channel, channel, 3, padding=1) 
+        self.conv_upsample5 = BasicConv2d(channel, channel, 3, padding=1)       
+        self.CFF2 = CFF(channel) 
 
-        self.out_CFM = nn.Conv2d(dim, 1, 1)    
+        self.conv2 = BasicConv2d(2 * channel, channel, 3, padding=1)  
+        self.conv_out = nn.Conv2d(channel, 1, 1)    
     
-    def forward(self, inputs, recurrence=True):
+    def forward(self, inputs):
                 
         x4 = inputs[3]
         x3 = inputs[2]
@@ -143,31 +153,22 @@ class MFA(nn.Module):
 
         x2 = self.Translayer2_1(x2)  
         x3 = self.Translayer3_1(x3)  
-        x4 = self.Translayer4_1(x4)   
-
-        x4_1 = x4
+        x4 = self.Translayer4_1(x4)                     
                 
-        x3_1 = self.conv_upsample1(self.upsample(x4)) * x3  
-        x3_1 = self.ca_sa3(x3_1)   
+        x2 = self.conv_upsample2(self.upsample(self.upsample(x4))) * self.conv_upsample3(self.upsample(x3)) * x2
+        x3 = self.conv_upsample1(self.upsample(x4)) * x3 
+
+        T4 = self.conv_upsample4(self.upsample(x4))       
+        T3 = self.CFF3(T4, x3)   
+
+        T3 = self.conv3(T3)      
+        T3 = self.conv_upsample5(self.upsample(T3))   
+        T2 = self.CFF2(T3, x2) 
+
+        T2 = self.conv2(T2)    
+        output = self.conv_out(T2)        
         
-        x2_1 = self.conv_upsample2(self.upsample(self.upsample(x4))) * self.conv_upsample3(self.upsample(x3)) * x2
-        x2_1 = self.ca_sa2(x2_1)   
-
-        x3_ = self.cross_axis3(self.conv_upsample4(self.upsample(x4_1)), x3_1)
-        if recurrence:
-            x3_ = self.cross_axis3(x3_, x3_1) 
-        x3_3 = torch.cat([x3_1, x3_], dim=1)   
-        x3_3 = self.conv3(x3_3)            
-
-        x2_ = self.cross_axis2(self.conv_upsample5(self.upsample(x3_3)), x2_1)   
-        if recurrence:
-            x2_ = self.cross_axis2(x2_, x2_1)
-        x2_2 = torch.cat([x2_1, x2_], dim=1) 
-        x2_2 = self.conv2(x2_2)    
-
-        output = self.out_CFM(x2_2)        
-        
-        return x2_2, output  
+        return T2, output   
     
 class BNPReLU(nn.Module):
     def __init__(self, dim):
