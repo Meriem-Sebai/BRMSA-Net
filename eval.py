@@ -10,8 +10,7 @@ from eval_functions import *
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--test_path', type=str, default='')
-    parser.add_argument('--task_folder', type=str, default='polyp')
+    parser.add_argument('--test_path', type=str, default='')    
     parser.add_argument('--datasets', nargs='+', type=str, default=['CVC-ClinicDB', 'Kvasir', 'CVC-ColonDB', 'ETIS-LaribPolypDB'])
     parser.add_argument('--metrics', nargs='+', type=str, default=['meanDic', 'meanIoU', 'wFm', 'Sm', 'meanEm', 'mae'])
     args = parser.parse_args()
