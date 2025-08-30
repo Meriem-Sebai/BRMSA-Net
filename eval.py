@@ -16,8 +16,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     data_path = './data/{}'.format(args.test_path)
-    pred_path = './results/{}/'.format(args.task_folder)
-    result_path = './results_csv/{}/'.format(args.task_folder)
+    pred_path = './results'
+    result_path = './results_csv'
     if not os.path.exists(result_path):
         os.makedirs(result_path, exist_ok=True)
     else:
